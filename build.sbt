@@ -11,5 +11,9 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   evolutions,
-  "mysql" % "mysql-connector-java" % "5.1.38"
+  "mysql" % "mysql-connector-java" % "5.1.38",
+  "com.typesafe.play" %% "play-json" % "2.3.4",
+  "org.mindrot" % "jbcrypt" % "0.3m"
 )
+
+enablePlugins(PlayEbean)

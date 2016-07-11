@@ -11,10 +11,16 @@
  *@
 @main("Welcome to Play") {
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Java")
+   @helper.form(action = routes.HomeController.signUp){
+   		Name: <input name="name">
+   		<br>
+   		Email: <input name="email">
+   		<br>
+   		Mobile:<input name="mobile">
+   		<br>
+   		Password:<input name="password">
+   		<br>
+   		<input type="submit">
+   }
 
 }

@@ -5,11 +5,13 @@ import java.util.List;
 
 import models.Login;
 import models.Users;
+import play.api.mvc.Security;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
+import play.mvc.Controller.*;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -64,7 +66,8 @@ public class HomeController extends Controller {
 		user.save();
     	return redirect(routes.HomeController.index());
     }
-    
+
+    @play.mvc.Security.Authenticated(Secured.class)
     public Result getUsers(){
     	List<Users> users = new Model.Finder<>(String.class, Users.class).all();
     	

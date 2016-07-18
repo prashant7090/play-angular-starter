@@ -73,6 +73,15 @@ public class HomeController extends Controller {
     	
     	return ok(Json.toJson(users));
     }
+
+
+    public Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(
+                routes.HomeController.login()
+        );
+    }
     
 
 }

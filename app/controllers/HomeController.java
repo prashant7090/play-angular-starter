@@ -3,14 +3,19 @@ package controllers;
 
 import java.util.List;
 
+import models.Login;
 import models.Users;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
+
 import org.mindrot.jbcrypt.BCrypt;
+
 import com.avaje.ebean.Model;
+
+import static play.data.Form.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -26,6 +31,30 @@ public class HomeController extends Controller {
      */
     public Result index() {	
         return ok(index.render("Your new application is ready."));
+    }
+    
+    public Result login() {
+        return ok(
+            login.render()
+        );
+    }
+    
+    public Result authenticate(){
+    	Form<Login> form = Form.form(Login.class).bindFromRequest();
+    	Login login = form.get();
+        String email = login.email;
+        String password = login.password;
+
+        if(email != null && password != null){
+            Users find = new Users();
+            Users user = new Model.Finder<>(String.class, Users.class).where().eq("email", email).findUnique();
+            if(user != null && BCrypt.checkpw(password,user.password)){
+                session().clear();
+                session("email",user.email);
+            }
+            return ok();
+        }
+    	return badRequest();
     }
     
     public Result signUp(){

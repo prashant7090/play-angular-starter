@@ -4,8 +4,12 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+
 GET     /login                  	controllers.HomeController.login
 POST	/login						controllers.HomeController.authenticate
+
+GET     /signup                     controllers.HomeController.signUp
+POST 	/signup						controllers.HomeController.register
 
 GET     /logout                     controllers.HomeController.logout
 
@@ -14,7 +18,7 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
-POST 	/signup						controllers.HomeController.signUp
+
 GET		/users						controllers.HomeController.getUsers
 
 # Map static resources from the /public folder to the /assets URL path

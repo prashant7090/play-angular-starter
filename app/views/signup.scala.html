@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Signup</title>
+    </head>
+    <body>
+
+        @helper.form(action = routes.HomeController.register){
+            Name: <input name="name">
+            <br>
+            Email: <input name="email">
+            <br>
+            Mobile:<input name="mobile">
+            <br>
+            Password:<input type="password" name="password">
+            <br>
+            <input type="submit">
+        }
+
+
+    </body>
+</html>

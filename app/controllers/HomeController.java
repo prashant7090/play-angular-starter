@@ -31,6 +31,7 @@ public class HomeController extends Controller {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+    @play.mvc.Security.Authenticated(Secured.class)
     public Result index() {	
         return ok(index.render("Your new application is ready."));
     }
@@ -38,6 +39,13 @@ public class HomeController extends Controller {
     public Result login() {
         return ok(
             login.render()
+        );
+    }
+
+
+    public Result signUp(){
+        return ok(
+                signup.render()
         );
     }
     
@@ -53,13 +61,14 @@ public class HomeController extends Controller {
             if(user != null && BCrypt.checkpw(password,user.password)){
                 session().clear();
                 session("email",user.email);
+                return redirect(routes.HomeController.index());
             }
-            return ok();
+            
         }
     	return badRequest();
     }
     
-    public Result signUp(){
+    public Result register(){
 		Form<Users> form = Form.form(Users.class).bindFromRequest();
 		Users user = form.get();
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());

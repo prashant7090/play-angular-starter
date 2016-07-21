@@ -2,14 +2,32 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(message: String)
 
 @*
  * Call the `main` template with two arguments. The first
  * argument is a `String` with the title of the page, the second
  * argument is an `Html` object containing the body of the page.
  *@
-@main("Welcome to Play") {
+<html ng-app="sairat">
 
-   Simple Play
-}
+ <head>
+
+ </head>
+
+ <body ng-controller="MainCtrl">
+
+   <div ui-view></div>
+
+
+   <script type="text/javascript" src='@routes.Assets.versioned("js/jquery/jquery-2.1.1.min.js")'></script>
+   <script type="text/javascript" src='@routes.Assets.versioned("js/angular/angular.min.js")'></script>
+   <script type="text/javascript" src='@routes.Assets.versioned("js/ui-router/angular-ui-router.min.js")'></script>
+   <script type="text/javascript" src='@routes.Assets.versioned("js/app.js")'></script>
+   <script type="text/javascript" src='@routes.Assets.versioned("js/config.js")'></script>
+   <script type="text/javascript" src='@routes.Assets.versioned("js/controllers/main_controller.js")'></script>
+
+ </body>
+
+</html>
+
+

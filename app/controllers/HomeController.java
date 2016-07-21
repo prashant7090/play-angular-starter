@@ -33,7 +33,7 @@ public class HomeController extends Controller {
      */
     @play.mvc.Security.Authenticated(Secured.class)
     public Result index() {	
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render());
     }
     
     public Result login() {

@@ -1,7 +1,7 @@
 function MainCtrl($state){
 
     console.log("I am from angular Controller")
-    $state.go('welcome')
+
 
 }
 

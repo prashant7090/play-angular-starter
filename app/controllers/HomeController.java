@@ -5,6 +5,8 @@ import java.util.List;
 
 import models.Login;
 import models.Users;
+import models.dao.UserDao;
+import models.dao.ebean.EbeanUserDao;
 import play.api.mvc.Security;
 import play.data.Form;
 import play.libs.Json;
@@ -31,6 +33,8 @@ public class HomeController extends Controller {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+    private UserDao userDao = new EbeanUserDao();
+
     @play.mvc.Security.Authenticated(Secured.class)
     public Result index() {	
         return ok(index.render());
@@ -78,9 +82,9 @@ public class HomeController extends Controller {
 
     @play.mvc.Security.Authenticated(Secured.class)
     public Result getUsers(){
-    	List<Users> users = new Model.Finder<>(String.class, Users.class).all();
-    	
-    	return ok(Json.toJson(users));
+    	//List<Users> users = new Model.Finder<>(String.class, Users.class).all();
+    	List<Users> users1 = userDao.findAllUsers();
+    	return ok(Json.toJson(users1));
     }
 
 

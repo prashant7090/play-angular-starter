@@ -59,7 +59,7 @@ public class HomeController extends Controller {
     public Result authenticate(){
     	Form<Login> form = Form.form(Login.class).bindFromRequest();
     	Login login = form.get();
-        String email = login.email;
+        String email = login.email.toLowerCase();
         String password = login.password;
 
         if(email != null && password != null){
@@ -78,6 +78,7 @@ public class HomeController extends Controller {
     public Result register(){
 		Form<Users> form = Form.form(Users.class).bindFromRequest();
 		Users user = form.get();
+        user.email = form.get().email.toLowerCase();
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());
 		user.save();
     	return redirect(routes.HomeController.index());

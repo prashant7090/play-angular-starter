@@ -81,7 +81,7 @@ public class HomeController extends Controller {
         user.email = form.get().email.toLowerCase();
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());
 		user.save();
-    	return redirect(routes.HomeController.index());
+    	return redirect(routes.HomeController.login());
     }
 
     @play.mvc.Security.Authenticated(Secured.class)

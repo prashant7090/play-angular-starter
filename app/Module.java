@@ -1,6 +1,9 @@
 import com.google.inject.AbstractModule;
 import java.time.Clock;
 
+import com.google.inject.Singleton;
+import models.dao.DaoProvider;
+import models.dao.ebean.EbeanDaoProvider;
 import services.ApplicationTimer;
 import services.AtomicCounter;
 import services.Counter;
@@ -26,6 +29,8 @@ public class Module extends AbstractModule {
         bind(ApplicationTimer.class).asEagerSingleton();
         // Set AtomicCounter as the implementation for Counter.
         bind(Counter.class).to(AtomicCounter.class);
+
+        bind(DaoProvider.class).to(EbeanDaoProvider.class).in(Singleton.class);
     }
 
 }

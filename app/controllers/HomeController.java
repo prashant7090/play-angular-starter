@@ -11,6 +11,7 @@ import models.dao.UserDao;
 import models.dao.ebean.EbeanUserDao;
 import play.api.mvc.Security;
 import play.data.Form;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -37,6 +38,8 @@ public class HomeController extends Controller {
      */
     @Inject
     DaoProvider provider;
+    @Inject
+    FormFactory formFactory;
 
     @play.mvc.Security.Authenticated(Secured.class)
     public Result index() {	
@@ -57,7 +60,7 @@ public class HomeController extends Controller {
     }
     
     public Result authenticate(){
-    	Form<Login> form = Form.form(Login.class).bindFromRequest();
+    	Form<Login> form = formFactory.form(Login.class).bindFromRequest();
     	Login login = form.get();
         String email = login.email.toLowerCase();
         String password = login.password;
@@ -76,7 +79,7 @@ public class HomeController extends Controller {
     }
     
     public Result register(){
-		Form<Users> form = Form.form(Users.class).bindFromRequest();
+		Form<Users> form = formFactory.form(Users.class).bindFromRequest();
 		Users user = form.get();
         user.email = form.get().email.toLowerCase();
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());
@@ -99,6 +102,5 @@ public class HomeController extends Controller {
                 routes.HomeController.login()
         );
     }
-    
 
 }

@@ -6,7 +6,10 @@ import javax.persistence.Id;
 import play.data.validation.Constraints.Required;
 
 import com.avaje.ebean.Model;
+import play.data.validation.ValidationError;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -40,5 +43,24 @@ public class Users extends Model{
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+	public List<ValidationError> validate(){
+		System.out.println("Validationsssssssssssssssssss");
+		List<ValidationError> errors = new ArrayList<>();
+
+		if( name == null || name.length() == 0){
+			errors.add(new ValidationError("name", "Name can not be blanck"));
+		}
+
+		if( email == null || email.length() == 0){
+			errors.add(new ValidationError("email", "Email can not be blanck"));
+		}
+
+		if( password == null || password.length() == 0){
+			errors.add(new ValidationError("password", "Password can not be blanck"));
+		}
+		return errors.isEmpty() ? null:errors;
+	}
+
 		
 }

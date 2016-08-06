@@ -45,7 +45,6 @@ public class Users extends Model{
 	}
 
 	public List<ValidationError> validate(){
-		System.out.println("Validationsssssssssssssssssss");
 		List<ValidationError> errors = new ArrayList<>();
 
 		if( name == null || name.length() == 0){

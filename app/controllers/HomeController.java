@@ -8,21 +8,18 @@ import models.Login;
 import models.Users;
 import models.dao.DaoProvider;
 import models.dao.UserDao;
-import models.dao.ebean.EbeanUserDao;
-import play.api.mvc.Security;
+import play.auth.AdminAuthenticator;
+import play.auth.Secured;
 import play.data.Form;
 import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
-import play.mvc.Controller.*;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.avaje.ebean.Model;
-
-import static play.data.Form.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -71,6 +68,9 @@ public class HomeController extends Controller {
             if(user != null && BCrypt.checkpw(password,user.password)){
                 session().clear();
                 session("email",user.email);
+                if(user.role!= null && user.role.equals("admin")){
+                    session("role","admin");
+                }
                 return redirect(routes.HomeController.index());
             }
             

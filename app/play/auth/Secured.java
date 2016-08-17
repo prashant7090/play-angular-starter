@@ -1,10 +1,11 @@
 
-package controllers;
+package play.auth;
 
 /**
  * Created by prashant on 18/7/16.
  */
 
+import controllers.routes;
 import play.*;
 import play.mvc.*;
 import play.mvc.Http.*;

@@ -24,6 +24,8 @@ public class Users extends Model{
 	public String mobile;
 	@Required
 	public String password;
+
+	public String role;
 	
 	public String getEmail() {
 		return email;

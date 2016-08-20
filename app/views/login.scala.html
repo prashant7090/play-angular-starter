@@ -8,19 +8,15 @@
 	   @helper.form(action = routes.HomeController.authenticate){
 	   		Email: <input name="email">
 			<span>
-				@if(user != null){
-					@if(user.errors().containsKey("email")){
-						@user.error("email").message()
-					}
+				@if(user != null && user.errors().containsKey("email")){
+					@user.error("email").message()
 				}
 			</span>
 	   		<br>
 	   		Password:<input type= "password" name="password">
-			<span class="text-danger">
-				@if(user != null){
-					@if(user.errors().containsKey("password")){
-						@user.error("password").message()
-					}
+			<span>
+				@if(user != null && user.errors().containsKey("password")){
+					@user.error("password").message()
 				}
 			</span>
 	   		<span>

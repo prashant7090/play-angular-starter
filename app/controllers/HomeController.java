@@ -45,7 +45,7 @@ public class HomeController extends Controller {
     
     public Result login() {
         return ok(
-            login.render()
+            login.render(null,"")
         );
     }
 
@@ -58,24 +58,30 @@ public class HomeController extends Controller {
     
     public Result authenticate(){
     	Form<Login> form = formFactory.form(Login.class).bindFromRequest();
-    	Login login = form.get();
-        String email = login.email.toLowerCase();
-        String password = login.password;
 
-        if(email != null && password != null){
-            Users find = new Users();
-            Users user = new Model.Finder<>(String.class, Users.class).where().eq("email", email).findUnique();
-            if(user != null && BCrypt.checkpw(password,user.password)){
-                session().clear();
-                session("email",user.email);
-                if(user.role!= null && user.role.equals("admin")){
-                    session("role","admin");
+        if (form.hasErrors()) {
+            return badRequest(login.render(form,""));
+        }else{
+            Login login = form.get();
+            String email = login.email.toLowerCase();
+            String password = login.password;
+
+            if(email != null && password != null){
+                Users find = new Users();
+                Users user = new Model.Finder<>(String.class, Users.class).where().eq("email", email).findUnique();
+                if(user != null && BCrypt.checkpw(password,user.password)){
+                    session().clear();
+                    session("email",user.email);
+                    if(user.role!= null && user.role.equals("admin")){
+                        session("role","admin");
+                    }
+                    return redirect(routes.HomeController.index());
                 }
-                return redirect(routes.HomeController.index());
+
             }
-            
+            return badRequest(views.html.login.render(null,"error"));
         }
-    	return badRequest();
+
     }
     
     public Result register(){

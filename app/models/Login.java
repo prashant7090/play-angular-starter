@@ -2,9 +2,12 @@ package models;
 
 import play.data.validation.Constraints;
 
+import static play.data.validation.Constraints.PatternValidator.message;
+
 public class Login {
-    @Constraints.Required
+
+    @Constraints.Required(message = "Enter the email-id")
     public String email;
-    @Constraints.Required
+    @Constraints.Required(message = "Enter the password")
     public String password;
 }

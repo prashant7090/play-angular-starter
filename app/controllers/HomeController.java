@@ -79,7 +79,7 @@ public class HomeController extends Controller {
                 }
 
             }
-            return badRequest(views.html.login.render(null,"error"));
+            return badRequest(views.html.login.render(form,"error"));
         }
 
     }

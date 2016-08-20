@@ -10,6 +10,7 @@
 			<span>
 				@if(user != null && user.errors().containsKey("email")){
 					@user.error("email").message()
+
 				}
 			</span>
 	   		<br>
@@ -20,7 +21,7 @@
 				}
 			</span>
 	   		<span>
-				@if(user == null && result.equals("error")){
+				@if(result.equals("error")){
 					The email and password you entered don't match.
 				}
 			</span>

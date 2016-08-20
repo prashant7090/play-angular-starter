@@ -1,3 +1,5 @@
+@(user: Form[Users])(confirmPassword: String)
+
 <html>
     <head>
         <title>Signup</title>
@@ -6,13 +8,40 @@
 
         @helper.form(action = routes.HomeController.register){
             Name: <input name="name">
+            <span>
+                @if(user != null &&  user.errors().containsKey("name")){
+                    @user.error("name").message()
+                }
+            </span>
             <br>
             Email: <input name="email">
+            <span>
+                @if(user != null && user.errors().containsKey("email")){
+                    @user.error("email").message()
+                }
+            </span>
             <br>
             Mobile:<input name="mobile">
-            <br>
+            <span class="text-danger">
+                @if(user != null && user.errors().containsKey("mobile")){
+                    @user.error("mobile").message()
+                }
+            </span>
+             <br>
             Password:<input type="password" name="password">
             <br>
+            <span class="text-danger">
+                @if( user != null && user.errors().containsKey("confirmpassword")){
+                    @user.error("confirmpassword").message()
+                }
+                @if(user != null && confirmPassword.equals("error")){
+                    These passwords don't match, You can try again!
+                }
+            </span>
+            <br>
+            Confirm Password:<input type="password" name="confirmpassword">
+            <br>
+
             <input type="submit">
         }
 

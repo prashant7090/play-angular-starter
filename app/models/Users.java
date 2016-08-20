@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import play.data.validation.Constraints;
 import play.data.validation.Constraints.Required;
 
 import com.avaje.ebean.Model;
@@ -17,13 +18,19 @@ public class Users extends Model{
 	
 	@Id
 	public long id;
-	@Required
+	@Required(message = "Enter Email-id")
+	@Constraints.Email(message = "Doesn't Look like email to us")
 	public String email;
-	@Required
+	@Required(message = "Enter your name")
 	public String name;
+	@Constraints.MaxLength(value = 10,message = "Mobile number should be 10 digits")
+	@Constraints.MinLength(value = 10, message="Mobile number should be 10 digits")
 	public String mobile;
-	@Required
+	@Required(message = "Enter your desired password")
 	public String password;
+
+	@Required(message = "Always confirm your password")
+	public transient String  confirmpassword;
 
 	public String role;
 	

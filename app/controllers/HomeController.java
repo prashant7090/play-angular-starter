@@ -52,7 +52,7 @@ public class HomeController extends Controller {
 
     public Result signUp(){
         return ok(
-                signup.render()
+                signup.render(null,"")
         );
     }
     
@@ -86,7 +86,13 @@ public class HomeController extends Controller {
     
     public Result register(){
 		Form<Users> form = formFactory.form(Users.class).bindFromRequest();
+        if (form.hasErrors()) {
+           return badRequest(signup.render(form,""));
+        }
 		Users user = form.get();
+        if(!(user.password.equals(user.confirmpassword))){
+            return badRequest(signup.render(form,"error"));
+        }
         user.email = form.get().email.toLowerCase();
 		user.password = BCrypt.hashpw(user.password, BCrypt.gensalt());
 		user.save();

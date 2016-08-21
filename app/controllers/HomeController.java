@@ -67,7 +67,8 @@ public class HomeController extends Controller {
             String password = login.password;
 
             if(email != null && password != null){
-                Users user = new Model.Finder<>(Users.class).where().eq("email", email).findUnique();
+                UserDao userDao = provider.userDao();
+                Users user = userDao.findUserByEmail(email);
                 if(user != null && BCrypt.checkpw(password,user.password)){
                     session().clear();
                     session("email",user.email);
@@ -101,8 +102,8 @@ public class HomeController extends Controller {
     @play.mvc.Security.Authenticated(Secured.class)
     public Result getUsers(){
         UserDao userDao = provider.userDao();
-        List<Users> users1 = userDao.findAllUsers();
-    	return ok(Json.toJson(users1));
+        List<Users> users = userDao.findAllUsers();
+    	return ok(Json.toJson(users));
     }
 
 

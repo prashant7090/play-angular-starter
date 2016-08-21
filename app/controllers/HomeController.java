@@ -15,6 +15,7 @@ import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.util.AuthenticatedUser;
 import views.html.*;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -25,7 +26,7 @@ import com.avaje.ebean.Model;
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
-public class HomeController extends Controller {
+public class HomeController extends AuthenticatedUser {
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -105,7 +106,6 @@ public class HomeController extends Controller {
         List<Users> users = userDao.findAllUsers();
     	return ok(Json.toJson(users));
     }
-
 
     public Result logout() {
         session().clear();

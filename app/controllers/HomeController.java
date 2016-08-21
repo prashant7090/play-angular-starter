@@ -68,7 +68,7 @@ public class HomeController extends Controller {
 
             if(email != null && password != null){
                 Users find = new Users();
-                Users user = new Model.Finder<>(String.class, Users.class).where().eq("email", email).findUnique();
+                Users user = new Model.Finder<>(Users.class).where().eq("email", email).findUnique();
                 if(user != null && BCrypt.checkpw(password,user.password)){
                     session().clear();
                     session("email",user.email);

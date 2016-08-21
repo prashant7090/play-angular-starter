@@ -13,6 +13,6 @@ public class EbeanUserDao implements UserDao {
 
     @Override
     public List<Users> findAllUsers(){
-        return new Model.Finder<>(String.class, Users.class).all();
+        return new Model.Finder<>(Users.class).all();
     }
 }

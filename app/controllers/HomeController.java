@@ -8,19 +8,15 @@ import models.Login;
 import models.Users;
 import models.dao.DaoProvider;
 import models.dao.UserDao;
-import play.auth.AdminAuthenticator;
 import play.auth.Secured;
 import play.data.Form;
 import play.data.FormFactory;
 import play.libs.Json;
-import play.mvc.Controller;
 import play.mvc.Result;
 import play.util.AuthenticatedUser;
 import views.html.*;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import com.avaje.ebean.Model;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -34,10 +30,18 @@ public class HomeController extends AuthenticatedUser {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+
+
     @Inject
-    DaoProvider provider;
+    private FormFactory formFactory;
+
+    private final UserDao userDao;
+
     @Inject
-    FormFactory formFactory;
+    HomeController(DaoProvider provider){
+        super(provider.userDao());
+        this.userDao = provider.userDao();
+    }
 
     @play.mvc.Security.Authenticated(Secured.class)
     public Result index() {	
@@ -67,8 +71,7 @@ public class HomeController extends AuthenticatedUser {
             String email = login.email.toLowerCase();
             String password = login.password;
 
-            if(email != null && password != null){
-                UserDao userDao = provider.userDao();
+            if(password != null){
                 Users user = userDao.findUserByEmail(email);
                 if(user != null && BCrypt.checkpw(password,user.password)){
                     session().clear();
@@ -102,7 +105,6 @@ public class HomeController extends AuthenticatedUser {
 
     @play.mvc.Security.Authenticated(Secured.class)
     public Result getUsers(){
-        UserDao userDao = provider.userDao();
         List<Users> users = userDao.findAllUsers();
     	return ok(Json.toJson(users));
     }

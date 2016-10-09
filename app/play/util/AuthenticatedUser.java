@@ -11,13 +11,16 @@ import play.mvc.Controller;
  */
 public class AuthenticatedUser extends Controller{
 
-    @Inject
-    DaoProvider provider;
+    protected final UserDao userDao;
+
+    public AuthenticatedUser(UserDao userDao) {
+        super();
+        this.userDao = userDao;
+    }
 
     public Users currentUser() {
         String email = session("email");
         if (email != null) {
-            UserDao userDao = provider.userDao();
             return userDao.findUserByEmail(email);
         }
 

@@ -61,6 +61,10 @@ public class Users extends Model{
 		this.token = token;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public List<ValidationError> validate(){
 		List<ValidationError> errors = new ArrayList<>();
 

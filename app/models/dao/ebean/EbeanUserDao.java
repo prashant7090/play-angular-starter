@@ -26,4 +26,9 @@ public class EbeanUserDao extends AbstractEbeanDao<String, Users> implements Use
     public Users findUserByEmail(String email){
         return finder.where().eq("email", email).findUnique();
     }
+
+    @Override
+    public Users findUserByToken(String token) {
+        return finder.where().eq("token",token).findUnique();
+    }
 }

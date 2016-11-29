@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.inject.Inject;
 import models.ForGotPassword;
 import models.Login;
+import models.UpdatePassword;
 import models.Users;
 import models.dao.DaoProvider;
 import models.dao.UserDao;
@@ -138,12 +139,25 @@ public class HomeController extends AuthenticatedUser {
         return ThreadLocalRandom.current().nextLong(111111111, 999999999 + 1);
     }
 
-
-
     public String generateForgotPasswordLink(String token){
         return request()._underlyingRequest().host() + "/forgot-password/" + token;
     }
 
-
+    public Result updatePassword(Long token){
+        Form<UpdatePassword> updatePassword = formFactory.form(UpdatePassword.class).bindFromRequest();
+        UpdatePassword updatePasswordForm = updatePassword.get();
+        String password = updatePasswordForm.getPassword();
+        String confirmPassword = updatePasswordForm.getConfirmPassword();
+        if(!(password.equals(confirmPassword))){
+            return badRequest("Password mismatch");
+        }
+        Users user = userDao.findUserByToken(token.toString());
+        if (user != null){
+            user.setPassword(BCrypt.hashpw(password,BCrypt.gensalt()));
+            user.update();
+            return ok(Json.toJson("your password is updated successfully"));
+        }
+        return badRequest("No User Found!");
+    }
 
 }

@@ -28,6 +28,7 @@ public class Users extends Model{
 	public String mobile;
 	@Required(message = "Enter your desired password")
 	public String password;
+	public Long token;
 
 	@Required(message = "Always confirm your password")
 	public transient String  confirmpassword;
@@ -51,6 +52,13 @@ public class Users extends Model{
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+	public Long getToken() {
+		return token;
+	}
+
+	public void setToken(Long token) {
+		this.token = token;
 	}
 
 	public List<ValidationError> validate(){

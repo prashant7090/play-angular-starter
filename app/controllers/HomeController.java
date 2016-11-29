@@ -4,6 +4,7 @@ package controllers;
 import java.util.List;
 
 import com.google.inject.Inject;
+import models.ForGotPassword;
 import models.Login;
 import models.Users;
 import models.dao.DaoProvider;
@@ -17,6 +18,7 @@ import play.util.AuthenticatedUser;
 import views.html.*;
 
 import org.mindrot.jbcrypt.BCrypt;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -116,5 +118,32 @@ public class HomeController extends AuthenticatedUser {
                 routes.HomeController.login()
         );
     }
+
+    public Result forgotPassword(){
+        Form<ForGotPassword> forgotPasswordForm = formFactory.form(ForGotPassword.class).bindFromRequest();
+        if (forgotPasswordForm.hasErrors())
+            return badRequest("Enter your email id ");
+        ForGotPassword forGotPasswordForm = forgotPasswordForm.get();
+        Users user = userDao.findUserByEmail(forGotPasswordForm.getEmail());
+        if(user != null ){
+            Long randomNumber = getRandomNumber();
+            user.setToken(randomNumber);
+            user.update();
+            return ok(Json.toJson(generateForgotPasswordLink(randomNumber.toString())));
+        }
+        return badRequest("No User Found with this email id");
+    }
+
+    private Long getRandomNumber(){
+        return ThreadLocalRandom.current().nextLong(111111111, 999999999 + 1);
+    }
+
+
+
+    public String generateForgotPasswordLink(String token){
+        return request()._underlyingRequest().host() + "/forgot-password/" + token;
+    }
+
+
 
 }

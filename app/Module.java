@@ -4,9 +4,6 @@ import java.time.Clock;
 import com.google.inject.Singleton;
 import models.dao.DaoProvider;
 import models.dao.ebean.EbeanDaoProvider;
-import services.ApplicationTimer;
-import services.AtomicCounter;
-import services.Counter;
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -26,8 +23,6 @@ public class Module extends AbstractModule {
         bind(Clock.class).toInstance(Clock.systemDefaultZone());
         // Ask Guice to create an instance of ApplicationTimer when the
         // application starts.
-        bind(ApplicationTimer.class).asEagerSingleton();
-
         bind(DaoProvider.class).to(EbeanDaoProvider.class).in(Singleton.class);
     }
 

@@ -1,6 +1,6 @@
 package com.seed.controllers.models.dao;
 
-import models.Users;
+import com.seed.models.Users;
 
 import java.util.List;
 

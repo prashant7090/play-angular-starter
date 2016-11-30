@@ -1,4 +1,4 @@
-package models;
+package com.seed.models;
 
 /**
  * Created by prashant on 29/11/16.

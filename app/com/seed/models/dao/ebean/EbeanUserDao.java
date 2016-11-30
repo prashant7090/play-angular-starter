@@ -3,7 +3,7 @@ package com.seed.models.dao.ebean;
 
 import com.seed.controllers.models.dao.UserDao;
 import com.avaje.ebean.Model.Finder;
-import models.Users;
+import com.seed.models.Users;
 
 import java.util.List;
 

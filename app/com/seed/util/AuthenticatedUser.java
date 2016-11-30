@@ -1,7 +1,7 @@
 package com.seed.util;
 
 import com.seed.controllers.models.dao.UserDao;
-import models.Users;
+import com.seed.models.Users;
 import play.mvc.Controller;
 
 /**

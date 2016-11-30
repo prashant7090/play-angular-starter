@@ -1,4 +1,4 @@
-package models;
+package com.seed.models;
 
 import play.data.validation.Constraints;
 

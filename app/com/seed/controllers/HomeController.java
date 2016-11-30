@@ -4,9 +4,9 @@ package com.seed.controllers;
 import java.util.List;
 
 import com.google.inject.Inject;
-import com.seed.models.ForGotPassword;
-import com.seed.models.Login;
-import com.seed.models.UpdatePassword;
+import com.seed.models.javabeans.ForGotPassword;
+import com.seed.models.javabeans.Login;
+import com.seed.models.javabeans.UpdatePassword;
 import com.seed.models.Users;
 import com.seed.controllers.models.dao.DaoProvider;
 import com.seed.controllers.models.dao.UserDao;

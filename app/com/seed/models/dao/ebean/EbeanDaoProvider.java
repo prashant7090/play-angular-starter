@@ -1,13 +1,13 @@
-package models.dao.ebean;
+package com.seed.models.dao.ebean;
 
-import models.dao.DaoProvider;
-import models.dao.UserDao;
+import com.seed.controllers.models.dao.DaoProvider;
+import com.seed.controllers.models.dao.UserDao;
 
 /**
  * Created by prashant on 28/7/16.
  * Class to hold the reference of all the provider
  */
-public class EbeanDaoProvider  implements DaoProvider{
+public class EbeanDaoProvider  implements DaoProvider {
 
     private final UserDao userDao = new EbeanUserDao();
 

@@ -1,8 +1,8 @@
-package models.dao.ebean;
+package com.seed.models.dao.ebean;
 
+import com.seed.controllers.models.dao.Dao;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Model.Finder;
-import models.dao.Dao;
 
 /**
  * Created by prashant on 21/8/16.

@@ -1,9 +1,7 @@
-package play.util;
+package com.seed.util;
 
-import com.google.inject.Inject;
+import com.seed.controllers.models.dao.UserDao;
 import models.Users;
-import models.dao.DaoProvider;
-import models.dao.UserDao;
 import play.mvc.Controller;
 
 /**

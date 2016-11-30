@@ -1,10 +1,9 @@
-package models.dao.ebean;
+package com.seed.models.dao.ebean;
 
 
-import com.avaje.ebean.Model;
+import com.seed.controllers.models.dao.UserDao;
 import com.avaje.ebean.Model.Finder;
 import models.Users;
-import models.dao.UserDao;
 
 import java.util.List;
 

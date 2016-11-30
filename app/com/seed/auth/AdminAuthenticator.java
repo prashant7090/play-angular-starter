@@ -1,8 +1,8 @@
-package play.auth;
+package com.seed.auth;
 
 
-import controllers.routes;
-import play.common.Roles;
+import com.seed.common.Roles;
+import com.seed.controllers.routes;
 import play.mvc.Http;
 import play.mvc.Result;
 
@@ -21,7 +21,7 @@ public class AdminAuthenticator extends play.mvc.Security.Authenticator {
         String userEmail = ctx.session().get("email");
         String userRole =ctx.session().get("role");
         if(userEmail != null && role.equals(userRole)){
-            return "Jiklayis";
+            return "Success";
         }else{
             return null;
         }

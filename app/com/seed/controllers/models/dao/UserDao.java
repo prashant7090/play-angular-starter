@@ -1,7 +1,6 @@
-package models.dao;
+package com.seed.controllers.models.dao;
 
 import models.Users;
-import org.h2.engine.User;
 
 import java.util.List;
 

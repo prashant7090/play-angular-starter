@@ -1,4 +1,4 @@
-package models.dao;
+package com.seed.controllers.models.dao;
 
 /**
  * Created by prashant on 21/8/16.

@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        @helper.form(action = routes.HomeController.register){
+        @helper.form(action = com.seed.controllers.routes.HomeController.register){
             Name: <input name="name">
             <span>
                 @if(user != null &&  user.errors().containsKey("name")){

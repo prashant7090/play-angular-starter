@@ -1,4 +1,4 @@
-package controllers;
+package com.seed.controllers;
 
 
 import java.util.List;
@@ -8,14 +8,14 @@ import models.ForGotPassword;
 import models.Login;
 import models.UpdatePassword;
 import models.Users;
-import models.dao.DaoProvider;
-import models.dao.UserDao;
-import play.auth.Secured;
+import com.seed.controllers.models.dao.DaoProvider;
+import com.seed.controllers.models.dao.UserDao;
+import com.seed.auth.Secured;
 import play.data.Form;
 import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Result;
-import play.util.AuthenticatedUser;
+import com.seed.util.AuthenticatedUser;
 import views.html.*;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -82,7 +82,7 @@ public class HomeController extends AuthenticatedUser {
                     if(user.role!= null && user.role.equals("admin")){
                         session("role","admin");
                     }
-                    return redirect(routes.HomeController.index());
+                    return redirect(com.seed.controllers.routes.HomeController.index());
                 }
 
             }
@@ -116,7 +116,7 @@ public class HomeController extends AuthenticatedUser {
         session().clear();
         flash("success", "You've been logged out");
         return redirect(
-                routes.HomeController.login()
+                com.seed.controllers.routes.HomeController.login()
         );
     }
 

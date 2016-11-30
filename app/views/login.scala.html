@@ -5,7 +5,7 @@
     </head>
     <body>
 	   
-	   @helper.form(action = routes.HomeController.authenticate){
+	   @helper.form(action = com.seed.controllers.routes.HomeController.authenticate){
 	   		Email: <input name="email">
 			<span>
 				@if(user != null && user.errors().containsKey("email")){

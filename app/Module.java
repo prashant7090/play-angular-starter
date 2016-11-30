@@ -2,8 +2,8 @@ import com.google.inject.AbstractModule;
 import java.time.Clock;
 
 import com.google.inject.Singleton;
-import models.dao.DaoProvider;
-import models.dao.ebean.EbeanDaoProvider;
+import com.seed.controllers.models.dao.DaoProvider;
+import com.seed.models.dao.ebean.EbeanDaoProvider;
 
 /**
  * This class is a Guice module that tells Guice how to bind several

@@ -1,4 +1,4 @@
-package play.common;
+package com.seed.common;
 
 /**
  * Created by prashant on 18/8/16.
